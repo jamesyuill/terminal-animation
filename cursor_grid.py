@@ -5,7 +5,7 @@ import keyboard
 
 # cursor = ['.','.','.','.','.','.','.','.','o','.','.','.','.','.','.','.','.',]
 
-
+ship = input('you ready to play? choose your ship character: ')[0]
 
 cursor = [
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
@@ -13,7 +13,7 @@ cursor = [
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
-    ['.','.','.','.','.','A','.','.','.','.','.','.','.','.',],
+    ['.','.','.','.','.',ship,'.','.','.','.','.','.','.','.',],
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
 ]
@@ -25,7 +25,7 @@ grid_x_max = len(cursor[0])
 def currentPosition(cursor):
     for i, row in enumerate(cursor):
         for j, element in enumerate(row):
-            if element == 'A':
+            if element == ship:
                 return {'y':i, 'x':j}
     return None
 
@@ -35,16 +35,16 @@ def movePosition(cursor_list, direction):
     o_pos = currentPosition(cursor_list)
 
     if direction == 'left' and o_pos.get('x') != 0:
-        cursor_list[o_pos.get('y')][o_pos.get('x') - 1] = 'A'
+        cursor_list[o_pos.get('y')][o_pos.get('x') - 1] = ship
         cursor_list[o_pos.get('y')][o_pos.get('x')] = '.'
     elif direction == 'right' and o_pos.get('x') != (grid_x_max - 1):
-        cursor_list[o_pos.get('y')][o_pos.get('x') + 1] = 'A'
+        cursor_list[o_pos.get('y')][o_pos.get('x') + 1] = ship
         cursor_list[o_pos.get('y')][o_pos.get('x')] = '.'
     elif direction == 'up' and o_pos.get('y') != 0:
-        cursor_list[o_pos.get('y')-1][o_pos.get('x')] = 'A'
+        cursor_list[o_pos.get('y')-1][o_pos.get('x')] = ship
         cursor_list[o_pos.get('y')][o_pos.get('x')] = '.'
     elif direction == 'down' and o_pos.get('y') != (grid_y_max - 1):
-        cursor_list[o_pos.get('y')+1][o_pos.get('x')] = 'A'
+        cursor_list[o_pos.get('y')+1][o_pos.get('x')] = ship
         cursor_list[o_pos.get('y')][o_pos.get('x')] = '.'
 
     return cursor_list
@@ -69,7 +69,7 @@ def explosion(y_index,bomb_pos):
           '|'+''.join(cursor[6]) + '|'+'\n' +
           '|'+''.join(cursor[7]) + '|')
     sleep(0.5)
-    print('You lose bozo!')
+    print('\n', f'You got hit! You managed to avoid {player_score} bombs')
 
 
 
@@ -85,7 +85,7 @@ def createBomb():
 bomb = createBomb()
 y_index = 0
 delay = 0
-
+player_score = 0
 
 os.system('stty -echo')
 
@@ -98,6 +98,7 @@ while True:
     if y_index == grid_y_max:
         cursor[grid_y_max-1][bomb.get('x')] = '.'
         y_index = 0
+        player_score += 1
         bomb = createBomb()
     delay += 1
 
