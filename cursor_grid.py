@@ -5,7 +5,8 @@ import keyboard
 
 # cursor = ['.','.','.','.','.','.','.','.','o','.','.','.','.','.','.','.','.',]
 
-ship = input('you ready to play? choose your ship character or hit enter to use our default: ') or 'A'
+ship = input('Choose your ship character or hit enter to use our default: ') or 'A'
+speed = int(input('Difficulty level? (1-5): ')) or 1
 
 cursor = [
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
@@ -108,7 +109,7 @@ while True:
         y_index = 0
         player_score += 1
         bomb = createBomb()
-    delay += 1
+    delay += speed
 
 
     ship_pos = currentPosition(cursor)
