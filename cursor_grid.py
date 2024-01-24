@@ -5,7 +5,7 @@ import keyboard
 
 # cursor = ['.','.','.','.','.','.','.','.','o','.','.','.','.','.','.','.','.',]
 
-ship = input('you ready to play? choose your ship character: ')[0]
+ship = input('you ready to play? choose your ship character or hit enter to use our default: ') or 'A'
 
 cursor = [
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
@@ -17,6 +17,17 @@ cursor = [
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
 ]
+
+def displayGrid(cursor):
+    print('|'+''.join(cursor[0]) + '|'+'\n' +
+          '|'+''.join(cursor[1]) + '|'+'\n' +
+          '|'+''.join(cursor[2]) + '|'+'\n' +
+          '|'+''.join(cursor[3]) + '|'+'\n' +
+          '|'+''.join(cursor[4]) + '|'+'\n' +
+          '|'+''.join(cursor[5]) + '|'+'\n' +
+          '|'+''.join(cursor[6]) + '|'+'\n' +
+          '|'+''.join(cursor[7]) + '|')
+
 
 grid_y_max = len(cursor)
 grid_x_max = len(cursor[0])
@@ -60,16 +71,13 @@ def explosion(y_index,bomb_pos):
     cursor[site_y][site_x -1 ] = '\x1b[33m' + '(' + '\x1b[0m'
     cursor[site_y][site_x +1 ] = '\x1b[33m' + ')' + '\x1b[0m'
 
-    print('|'+''.join(cursor[0]) + '|'+'\n' +
-          '|'+''.join(cursor[1]) + '|'+'\n' +
-          '|'+''.join(cursor[2]) + '|'+'\n' +
-          '|'+''.join(cursor[3]) + '|'+'\n' +
-          '|'+''.join(cursor[4]) + '|'+'\n' +
-          '|'+''.join(cursor[5]) + '|'+'\n' +
-          '|'+''.join(cursor[6]) + '|'+'\n' +
-          '|'+''.join(cursor[7]) + '|')
+    displayGrid(cursor)
+
     sleep(0.5)
-    print('\n', f'You got hit! You managed to avoid {player_score} bombs')
+    if player_score == 1:
+        print('\n', f'You got hit! You managed to avoid {player_score} bomb')
+    else:
+        print('\n', f'You got hit! You managed to avoid {player_score} bombs')
 
 
 
@@ -110,15 +118,8 @@ while True:
         break
 
 
-    print('|'+''.join(cursor[0]) + '|'+'\n' +
-          '|'+''.join(cursor[1]) + '|'+'\n' +
-          '|'+''.join(cursor[2]) + '|'+'\n' +
-          '|'+''.join(cursor[3]) + '|'+'\n' +
-          '|'+''.join(cursor[4]) + '|'+'\n' +
-          '|'+''.join(cursor[5]) + '|'+'\n' +
-          '|'+''.join(cursor[6]) + '|'+'\n' +
-          '|'+''.join(cursor[7]) + '|')
-    
+    displayGrid(cursor)
+
     sleep(0.1)
     os.system('clear')
 
