@@ -5,6 +5,8 @@ import keyboard
 
 # cursor = ['.','.','.','.','.','.','.','.','o','.','.','.','.','.','.','.','.',]
 
+
+
 cursor = [
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
     ['.','.','.','.','.','.','.','.','.','.','.','.','.','.',],
@@ -54,18 +56,18 @@ def explosion(y_index,bomb_pos):
     site_x = bomb_pos.get('x')
     site_y = y_index
 
-    cursor[site_y][site_x] = '*'
-    cursor[site_y][site_x -1 ] = '('
-    cursor[site_y][site_x +1 ] = ')'
+    cursor[site_y][site_x] = '\x1b[31m' + '*' + '\x1b[0m'
+    cursor[site_y][site_x -1 ] = '\x1b[33m' + '(' + '\x1b[0m'
+    cursor[site_y][site_x +1 ] = '\x1b[33m' + ')' + '\x1b[0m'
 
-    print(''.join(cursor[0]) + '\n' +
-          ''.join(cursor[1]) + '\n' +
-          ''.join(cursor[2]) + '\n' +
-          ''.join(cursor[3]) + '\n' +
-          ''.join(cursor[4]) + '\n' +
-          ''.join(cursor[5]) + '\n' +
-          ''.join(cursor[6]) + '\n' +
-          ''.join(cursor[7]))
+    print('|'+''.join(cursor[0]) + '|'+'\n' +
+          '|'+''.join(cursor[1]) + '|'+'\n' +
+          '|'+''.join(cursor[2]) + '|'+'\n' +
+          '|'+''.join(cursor[3]) + '|'+'\n' +
+          '|'+''.join(cursor[4]) + '|'+'\n' +
+          '|'+''.join(cursor[5]) + '|'+'\n' +
+          '|'+''.join(cursor[6]) + '|'+'\n' +
+          '|'+''.join(cursor[7]) + '|')
     sleep(0.5)
     print('You lose bozo!')
 
@@ -107,14 +109,14 @@ while True:
         break
 
 
-    print(''.join(cursor[0]) + '\n' +
-          ''.join(cursor[1]) + '\n' +
-          ''.join(cursor[2]) + '\n' +
-          ''.join(cursor[3]) + '\n' +
-          ''.join(cursor[4]) + '\n' +
-          ''.join(cursor[5]) + '\n' +
-          ''.join(cursor[6]) + '\n' +
-          ''.join(cursor[7]))
+    print('|'+''.join(cursor[0]) + '|'+'\n' +
+          '|'+''.join(cursor[1]) + '|'+'\n' +
+          '|'+''.join(cursor[2]) + '|'+'\n' +
+          '|'+''.join(cursor[3]) + '|'+'\n' +
+          '|'+''.join(cursor[4]) + '|'+'\n' +
+          '|'+''.join(cursor[5]) + '|'+'\n' +
+          '|'+''.join(cursor[6]) + '|'+'\n' +
+          '|'+''.join(cursor[7]) + '|')
     
     sleep(0.1)
     os.system('clear')
