@@ -48,10 +48,30 @@ def movePosition(cursor_list, direction):
     return cursor_list
 
 
-# randomly insert a character in the first list of the matrix
-# then remove it and replace with a dot
-# move it into the next array at the same index position
-# so i need the x & y position of the bomb
+#explosion function that takes in the position of the bomb and works out the indeses
+
+def explosion(y_index,bomb_pos):
+    site_x = bomb_pos.get('x')
+    site_y = y_index
+
+    cursor[site_y][site_x] = '*'
+    cursor[site_y][site_x -1 ] = '('
+    cursor[site_y][site_x +1 ] = ')'
+
+    print(''.join(cursor[0]) + '\n' +
+          ''.join(cursor[1]) + '\n' +
+          ''.join(cursor[2]) + '\n' +
+          ''.join(cursor[3]) + '\n' +
+          ''.join(cursor[4]) + '\n' +
+          ''.join(cursor[5]) + '\n' +
+          ''.join(cursor[6]) + '\n' +
+          ''.join(cursor[7]))
+    sleep(0.5)
+    print('You lose bozo!')
+
+
+
+
 
 def createBomb():
     grid_width_index = grid_x_max - 1
@@ -59,12 +79,13 @@ def createBomb():
     return {"x":bomb_pos_x,"y":0}
 
 
-os.system('stty -echo')
 
 bomb = createBomb()
 y_index = 0
-
 delay = 0
+
+
+os.system('stty -echo')
 
 while True:
     
@@ -77,6 +98,15 @@ while True:
         y_index = 0
         bomb = createBomb()
     delay += 1
+
+
+    ship_pos = currentPosition(cursor)
+
+    if not ship_pos:
+        explosion(y_index, bomb)
+        break
+
+
     print(''.join(cursor[0]) + '\n' +
           ''.join(cursor[1]) + '\n' +
           ''.join(cursor[2]) + '\n' +
@@ -85,8 +115,10 @@ while True:
           ''.join(cursor[5]) + '\n' +
           ''.join(cursor[6]) + '\n' +
           ''.join(cursor[7]))
+    
     sleep(0.1)
     os.system('clear')
+
     if keyboard.is_pressed('left'):
         cursor = movePosition(cursor, 'left')
     elif keyboard.is_pressed('right'):
