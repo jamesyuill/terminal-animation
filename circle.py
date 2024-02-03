@@ -2,26 +2,23 @@ from random import randint
 import os
 from time import sleep
 
-grid_x = 40
-grid_y = int(grid_x / 2)
 
-grid = [
-    ['.','.','.','.','.'],
-    ['.','.','.','.','.'],
-    ['.','.','.','.','.'],
-    ['.','.','.','.','.'],
-    ['.','.','.','.','.'],
-]
 
-while True:
+rows = 50
+cols = 10
 
-    for y in range(len(grid)):
-        for x in range(len(grid[0])):
-            grid[y][x] = '0'
+def createGrid():
+    grid = []
+    for y in range(cols):
+        row = []
+        for x in range(rows):
+            row.append('.')
+        grid.append(row) 
+    return grid
 
-    print(grid)
-            
-        
-        
-    sleep(0.1)
-    os.system('clear')
+
+grid = createGrid()
+for i in range(len(grid)):
+    print(f'{"".join(grid[i])}\n')
+
+
