@@ -22,22 +22,21 @@ grid = createGrid()
 
 #adds shape to grid
 r = 0
-angle = 0
-
-
+angle = 180
 
 while True:
 
-    for angle in range(2000):
+    for angle in range(5000):
         pos_x = int(r * math.cos(angle))
-        pos_y = int(r * math.sin(angle) / 2)
-        grid[pos_y][pos_x] = '\x1b[40m'+'o'+'\x1b[0m'
+        pos_y = int(r * math.sin(angle)/2)
+        grid[pos_y][pos_x] = '\x1b[43m'+'\x1b[31m'+'/'+'\x1b[0m'
 
 #print the grid
     for i in range(len(grid)):
         print(f'{"".join(grid[i])}')
 
     r += 1
+    
 
     sleep(0.2)
     os.system('clear')
